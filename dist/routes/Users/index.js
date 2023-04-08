@@ -5,8 +5,8 @@ import { UsersRepository } from "../../db/mongo/repositories/users.js";
 const userRouter = Router();
 import { UserModel } from "../../db/mongo/schemas/Users.js";
 const usersRepository = new UsersRepository(UserModel);
-const usersServices = new UsersServices(usersRepository);
-const usersController = new UserController(usersServices);
+const usersMongoServices = new UsersServices(usersRepository);
+const usersController = new UserController(usersMongoServices);
 const getUsers = async (req, res) => {
     const response = await usersController.getUsers(req, res);
     res.json(response);

@@ -1,11 +1,12 @@
 import express, { Request, Response, Application } from "express";
-import * as dotenv from 'dotenv';
+import dotenv from 'dotenv'
 import bodyParser from "body-parser";
-dotenv.config();
+import * as path from "path";
 
 const createServer = () : Application => {
+    dotenv.config()
     const app = express();
-    const port = 3001
+    const port = process.env.PORT || 3001
     app.use(bodyParser.json())
 
 

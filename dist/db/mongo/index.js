@@ -10,7 +10,8 @@ export class MongoDB {
         this._connection = Mongoose.connection;
     }
     connect() {
-        Mongoose.connect('mongodb://lucas:mysecretpassword@localhost:27017/herois'); //colocar no .env
+        const { DB_HOST } = process.env;
+        Mongoose.connect(`${DB_HOST}`);
         const connection = Mongoose.connection;
         connection.once('open', () => console.log('database running'));
         return connection;

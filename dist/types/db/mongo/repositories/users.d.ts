@@ -24,7 +24,8 @@
 /// <reference types="mongoose" />
 /// <reference types="mongoose/types/inferschematype.js" />
 import { UserModel } from "../schemas/Users.js";
-export declare class UsersRepository {
+import { IUsersRepository } from "../../../interfaces/Users/UsersRepository/index.js";
+export declare class UsersRepository implements IUsersRepository {
     model: import("mongoose").Model<{
         id: string;
         name: string;
