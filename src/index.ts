@@ -1,7 +1,6 @@
 import userRouter from "./routes/Users/index.js";
 import loginRouter from "./routes/Login/index.js";
 import createServer from "./app.js";
-import {MongoDB} from "./db/mongo/index.js";
 import {mongoHelper} from "./helpers/MongoDb/index.js";
 
 const startServer = async () => {
