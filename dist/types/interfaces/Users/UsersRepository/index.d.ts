@@ -3,4 +3,5 @@ import { Users } from "../index.js";
 export interface IUsersRepository {
     model: typeof UserModel;
     getUsers(): Promise<Users>;
+    insertUser(user: Users): Promise<Users>;
 }

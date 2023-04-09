@@ -4,5 +4,12 @@ import { IUsersServices } from "../../interfaces/Users/UsersServices/index.js";
 export declare class UserController implements IUserController {
     readonly usersServices: IUsersServices;
     constructor(userServices: IUsersServices);
-    getUsers(req: Request, res: Response): Promise<import("../../interfaces/Users/index.js").Users>;
+    getUsers(req: Request, res: Response): Promise<import("../../interfaces/Users/index.js").Users | {
+        error: boolean;
+        message: string;
+    }>;
+    insertUser(req: Request, res: Response): Promise<import("../../interfaces/Users/index.js").Users | {
+        error: boolean;
+        message: string;
+    }>;
 }

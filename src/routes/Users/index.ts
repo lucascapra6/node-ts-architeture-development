@@ -15,7 +15,12 @@ const getUsers = async (req: Request, res: Response) => {
     const response = await usersController.getUsers(req, res)
     res.json(response)
 }
+const insertUser = async (req: Request, res: Response) => {
+    const response = await usersController.insertUser(req, res)
+    res.json(response)
+}
 
 userRouter.get('/users', getUsers);
+userRouter.post('/user', insertUser)
 
 export default userRouter;

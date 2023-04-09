@@ -25,6 +25,7 @@
 /// <reference types="mongoose/types/inferschematype.js" />
 import { UserModel } from "../schemas/Users.js";
 import { IUsersRepository } from "../../../interfaces/Users/UsersRepository/index.js";
+import { Users } from "../../../interfaces/Users/index.js";
 export declare class UsersRepository implements IUsersRepository {
     model: import("mongoose").Model<{
         id: string;
@@ -63,6 +64,19 @@ export declare class UsersRepository implements IUsersRepository {
     }, never>>>;
     constructor(model: typeof UserModel);
     getUsers(): Promise<(import("mongoose").Document<unknown, {}, {
+        id: string;
+        name: string;
+        lastName: string;
+        password: string;
+    }> & Omit<{
+        id: string;
+        name: string;
+        lastName: string;
+        password: string;
+    } & {
+        _id: import("mongoose").Types.ObjectId;
+    }, never>)[]>;
+    insertUser(user: Users): Promise<(import("mongoose").Document<unknown, {}, {
         id: string;
         name: string;
         lastName: string;

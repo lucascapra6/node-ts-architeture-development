@@ -5,5 +5,8 @@ export class UsersRepository {
     async getUsers() {
         return this.model.find();
     }
+    async insertUser(user) {
+        return this.model.create(user);
+    }
 }
 //# sourceMappingURL=users.js.map
