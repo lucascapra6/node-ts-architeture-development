@@ -1,18 +1,17 @@
 import {Request, Response} from 'express';
-import {UsersServices} from "../../services/UsersServices/index.js";
 import {IUserController} from "../../interfaces/Users/UserController/index.js";
-import {IUsersServices} from "../../interfaces/Users/UsersServices/index.js";
 import {ErrorHandler} from "../../helpers/Errors/index.js";
+import {IUsersRepository} from "../../interfaces/Users/UsersRepository/index.js";
 const errorHandler = new ErrorHandler()
 
 export class UserController implements IUserController{
-    public readonly usersServices
-    constructor(userServices: IUsersServices) {
-        this.usersServices = userServices
+    public readonly usersRepository
+    constructor(usersRepository: IUsersRepository) {
+        this.usersRepository = usersRepository
     }
     async getUsers(req: Request, res: Response) {
         try {
-            return await this.usersServices.getUsers()
+            return await this.usersRepository.getUsers()
         } catch (error) {
             return errorHandler.serverError(error)
         }
@@ -20,7 +19,7 @@ export class UserController implements IUserController{
     async insertUser(req: Request, res: Response) {
         const user = req.body
         try {
-            return await this.usersServices.insertUser(user)
+            return await this.usersRepository.insertUser(user)
         } catch (error) {
             return errorHandler.serverError(error)
         }

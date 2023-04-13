@@ -1,12 +1,12 @@
 import { ErrorHandler } from "../../helpers/Errors/index.js";
 const errorHandler = new ErrorHandler();
 export class UserController {
-    constructor(userServices) {
-        this.usersServices = userServices;
+    constructor(usersRepository) {
+        this.usersRepository = usersRepository;
     }
     async getUsers(req, res) {
         try {
-            return await this.usersServices.getUsers();
+            return await this.usersRepository.getUsers();
         }
         catch (error) {
             return errorHandler.serverError(error);
@@ -15,7 +15,7 @@ export class UserController {
     async insertUser(req, res) {
         const user = req.body;
         try {
-            return await this.usersServices.insertUser(user);
+            return await this.usersRepository.insertUser(user);
         }
         catch (error) {
             return errorHandler.serverError(error);

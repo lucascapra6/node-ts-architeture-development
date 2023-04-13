@@ -1,9 +1,14 @@
 import {IUsersCredentials} from "../../interfaces/Login/IUsersCredentials/index.js";
-class LoginController {
-    constructor() {
+import ILoginService from "../../interfaces/Login/LoginService/index.js";
+import ILoginController from "../../interfaces/Login/LoginController/index.js";
+class LoginController<T> implements ILoginController<T>{
+    loginService
+    constructor(loginService: ILoginService<T>) {
+        this.loginService = loginService
     }
 
-    authenticate(userCredentials: IUsersCredentials) {
+    handleLogin(userCredentials: T) {
+        return this.loginService.callLoginService(userCredentials)
     }
 }
 

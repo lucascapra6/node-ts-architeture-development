@@ -1,4 +1,4 @@
-export class UsersServices {
+export class MongoUsersServices {
     constructor(usersRepository) {
         this.usersRepository = usersRepository;
     }

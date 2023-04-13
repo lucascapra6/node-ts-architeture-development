@@ -1,7 +1,7 @@
 import {IUsersRepository} from "../../interfaces/Users/UsersRepository/index.js";
-import {IUsersServices} from "../../interfaces/Users/UsersServices/index.js";
+import {IMongoUsersServices} from "../../interfaces/Users/UsersServices/index.js";
 import {Users} from "../../interfaces/Users/index.js";
-export class UsersServices implements IUsersServices{
+export class MongoUsersServices implements IMongoUsersServices{
     public usersRepository;
 
     constructor(usersRepository: IUsersRepository) {

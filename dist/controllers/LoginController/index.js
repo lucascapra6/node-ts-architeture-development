@@ -1,7 +1,9 @@
 class LoginController {
-    constructor() {
+    constructor(loginService) {
+        this.loginService = loginService;
     }
-    authenticate(userCredentials) {
+    handleLogin(userCredentials) {
+        return this.loginService.callLoginService(userCredentials);
     }
 }
 export default LoginController;
