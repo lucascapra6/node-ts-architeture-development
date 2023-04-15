@@ -1,12 +1,10 @@
 import ILoginService from "../../interfaces/Login/LoginService/index.js";
+import IValidationService from "../../interfaces/Login/ValidationService/index.js";
+import ValidationService from "./ValidationService.js";
 
-export default class AbstractLoginService<T> implements ILoginService<T>{
-    authenticationService: any
-    validationService: any
-    constructor() {
+export default abstract class AbstractLoginService<T> implements ILoginService<T>{
+    abstract authenticationService: any
+    abstract validationService: IValidationService<T>
 
-    }
-    callLoginService<T>(userCredentials:T) {
-        console.log(userCredentials)
-    }
+    abstract callLoginService(userCredentials:T): void
 }
