@@ -1,9 +1,9 @@
 import {Request, Response} from "express";
 import {Users} from "../index.js";
 import {IMongoUsersServices} from "../UsersServices/index.js";
-import {IUsersRepository} from "../UsersRepository/index.js";
+import {IUsersRepositoryHandler} from "../UsersRepository/index.js";
 export interface IUserController {
-    usersRepository: IUsersRepository
+    usersRepositoryHandler: IUsersRepositoryHandler
     getUsers(req: Request, res: Response): Promise<Users | { error: boolean, message: unknown }>;
     insertUser(req: Request, res: Response): Promise<Users | { error: boolean, message: unknown }>;
 }

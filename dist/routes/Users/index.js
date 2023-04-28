@@ -1,9 +1,9 @@
 import { Router } from 'express';
 import { UserController } from "../../controllers/UserController/index.js";
-import { UsersRepository } from "../../db/mongo/repositories/users.js";
+import { UsersRepositoryHandler } from "../../model/Users/users.js";
 const userRouter = Router();
-import { UserModel } from "../../db/mongo/schemas/Users.js";
-const usersRepository = new UsersRepository(UserModel);
+import { UserModel } from "../../model/schemas/Users.js";
+const usersRepository = new UsersRepositoryHandler(UserModel);
 const usersController = new UserController(usersRepository);
 const getUsers = async (req, res) => {
     const response = await usersController.getUsers(req, res);

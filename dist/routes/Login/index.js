@@ -8,6 +8,17 @@ const doLogin = async (req, res) => {
     const response = await loginController.handleLogin({ email, password });
     return res.json(response);
 };
+const verifyRequest = (req, res, next) => {
+    try {
+        if (!req.body.email || !req.body.password) {
+            throw new Error('Parametro invalido');
+        }
+        next();
+    }
+    catch (e) {
+        res.status(500);
+    }
+};
 loginRouter.post('/login', doLogin);
 export default loginRouter;
 //# sourceMappingURL=index.js.map

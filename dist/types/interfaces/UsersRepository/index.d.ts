@@ -1,3 +1,3 @@
-export interface IUsersRepository {
+export interface IUsersRepositoryHandler {
     getUsers: () => any;
 }

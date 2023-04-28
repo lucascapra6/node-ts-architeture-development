@@ -1,11 +1,10 @@
-import { Request, Response, Router } from 'express';
+import { Request, Response, NextFunction, Router } from 'express';
 import {UserController} from "../../controllers/UserController/index.js";
-import {MongoUsersServices} from "../../services/UsersServices/index.js";
-import {UsersRepository} from "../../db/mongo/repositories/users.js";
+import {UsersRepositoryHandler} from "../../model/Users/users.js";
 const userRouter = Router();
-import {UserModel} from "../../db/mongo/schemas/Users.js";
+import {UserModel} from "../../model/schemas/Users.js";
 
-const usersRepository = new UsersRepository(UserModel)
+const usersRepository = new UsersRepositoryHandler(UserModel)
 const usersController = new UserController(usersRepository);
 
 const getUsers = async (req: Request, res: Response) => {

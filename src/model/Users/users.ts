@@ -1,7 +1,7 @@
 import {UserModel} from "../schemas/Users.js";
-import {IUsersRepository} from "../../../interfaces/Users/UsersRepository/index.js";
-import {Users} from "../../../interfaces/Users/index.js";
-export class UsersRepository implements IUsersRepository{
+import {IUsersRepositoryHandler} from "../../interfaces/Users/UsersRepository/index.js";
+import {Users} from "../../interfaces/Users/index.js";
+export class UsersRepositoryHandler implements IUsersRepositoryHandler{
     public model;
     constructor(model: typeof UserModel) {
         this.model = model

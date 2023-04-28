@@ -1,11 +1,10 @@
 import express from "express";
 import dotenv from 'dotenv';
-import bodyParser from "body-parser";
 const createServer = () => {
     dotenv.config();
     const app = express();
     const port = process.env.PORT || 3001;
-    app.use(bodyParser.json());
+    app.use(express.json()); //middleware do express que faz o parse da request
     app.get("/health", (req, res) => {
         res.send("UP");
     });

@@ -1,6 +1,6 @@
-import { UserModel } from "../../../db/mongo/schemas/Users.js";
+import { UserModel } from "../../../model/schemas/Users.js";
 import { Users } from "../index.js";
-export interface IUsersRepository {
+export interface IUsersRepositoryHandler {
     model: typeof UserModel;
     getUsers(): Promise<Users>;
     insertUser(user: Users): Promise<Users>;
