@@ -6,7 +6,9 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon"
+    "start": "nodemon",
+    "start-cluster": "tsc && pm2 start dist/index.js -i max",
+    "delete-clusters": "pm2 delete all"
   },
   "keywords": [],
   "author": "",
