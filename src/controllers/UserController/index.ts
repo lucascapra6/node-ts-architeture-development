@@ -24,4 +24,12 @@ export class UserController implements IUserController{
             return errorHandler.serverError(error)
         }
     }
+    async updateUser(req: Request, res: Response) {
+        const {userId, newUserData}= req.body
+        try {
+            return await this.usersRepositoryHandler.updateUser(userId, newUserData)
+        } catch (error) {
+            return errorHandler.serverError(error)
+        }
+    }
 }

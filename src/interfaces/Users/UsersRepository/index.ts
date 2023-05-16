@@ -4,4 +4,5 @@ export interface IUsersRepositoryHandler {
     model: typeof UserModel
     getUsers(): Promise<Users>
     insertUser(user: Users): Promise<Users>
+    updateUser(userId: string, newUserData: Users): any
 }

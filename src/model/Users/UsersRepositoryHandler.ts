@@ -9,7 +9,10 @@ export class UsersRepositoryHandler implements IUsersRepositoryHandler{
     async getUsers() {
         return this.model.find()
     }
-    async insertUser(user:Users) {
+    async insertUser(user:Users){
         return this.model.create(user)
+    }
+    async updateUser(userId: string, newUserData: Users) {
+        return this.model.findByIdAndUpdate(userId, newUserData, {new: true})
     }
 }
