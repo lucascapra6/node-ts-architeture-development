@@ -1,3 +1,4 @@
+// @ts-ignore
 import request from 'supertest'
 import createServer from "../../app";
 describe('', function () {
