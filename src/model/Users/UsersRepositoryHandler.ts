@@ -1,4 +1,4 @@
-import {UserModel} from "../schemas/Users.js";
+import {UserModel} from "./schemas/Users.js";
 import {IUsersRepositoryHandler} from "../../interfaces/Users/UsersRepository/index.js";
 import {Users} from "../../interfaces/Users/index.js";
 export class UsersRepositoryHandler implements IUsersRepositoryHandler{

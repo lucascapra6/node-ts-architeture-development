@@ -8,9 +8,12 @@ const usersSchema = new Mongoose.Schema({
         type: String,
         required: true
     },
-    id: {
+    nickName:{
         type: String,
         required: true
+    },
+    id: {
+        type: String
     },
     password: {
         type: String,

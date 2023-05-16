@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction, Router } from 'express';
 import {UserController} from "../../controllers/UserController/index.js";
-import {UsersRepositoryHandler} from "../../model/Users/users.js";
+import {UsersRepositoryHandler} from "../../model/Users/UsersRepositoryHandler.js";
 const userRouter = Router();
-import {UserModel} from "../../model/schemas/Users.js";
+import {UserModel} from "../../model/Users/schemas/Users.js";
 
 const usersRepository = new UsersRepositoryHandler(UserModel)
 const usersController = new UserController(usersRepository);
@@ -17,6 +17,6 @@ const insertUser = async (req: Request, res: Response) => {
 }
 
 userRouter.get('/users', getUsers);
-userRouter.post('/user', insertUser)
+userRouter.post('/insertUser', insertUser)
 
 export default userRouter;
