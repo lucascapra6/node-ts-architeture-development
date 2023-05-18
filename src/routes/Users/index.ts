@@ -12,8 +12,7 @@ const getUsers = async (req: Request, res: Response) => {
     res.json(response)
 }
 const insertUser = async (req: Request, res: Response) => {
-    const response = await usersController.insertUser(req, res)
-    res.json(response)
+    await usersController.insertUser(req, res)
 }
 const updateUser = async (req: Request, res: Response) => {
     const response = await usersController.updateUser(req, res)
