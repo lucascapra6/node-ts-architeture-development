@@ -11,7 +11,7 @@ describe('', function () {
         expect(response.status).toBe(200);
     })
     test('GET /users should respond with 200 success', async () => {
-        const response = await request(app).get('/users');
+        const response = await request(app).get('/v1/users');
         expect(response.status).toBe(200);
     }, 15000)
 });

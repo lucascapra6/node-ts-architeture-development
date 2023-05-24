@@ -4,7 +4,7 @@ import userRouter from "./routes/Users/index.js";
 import {mongoHelper} from "./helpers/MongoDb/index.js";
 import cors from "cors";
 import loginRouter from "./routes/Login/index.js";
-
+import api from './api.js'
 const createServer = () : Application => {
     dotenv.config()
     const app = express();
@@ -15,8 +15,9 @@ const createServer = () : Application => {
     app.get("/health", (req: Request, res: Response) => {
         res.send("UP");
     });
-    app.use(userRouter)
-    app.use(loginRouter)
+    app.use('/v1', api)
+    // app.use(userRouter)
+    // app.use(loginRouter)
     app.listen(port, () => {
         console.log(`Server running at http://localhost:${port}`);
     });
