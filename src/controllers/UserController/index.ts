@@ -3,6 +3,7 @@ import {IUserController} from "../../interfaces/Users/UserController/index.js";
 import {ErrorHandler} from "../../helpers/Errors/index.js";
 import {IUsersRepositoryHandler} from "../../interfaces/Users/UsersRepository/index.js";
 import {User, Users} from "../../interfaces/Users/index.js";
+import {getPagination, GetPaginationQueryParams} from "../../services/Query/query.js";
 const errorHandler = new ErrorHandler()
 
 export class UserController implements IUserController{
@@ -11,9 +12,18 @@ export class UserController implements IUserController{
         this.usersRepositoryHandler = usersRepositoryHandler
     }
     async getUsers(req?: Request, res?: Response) {
+        let skipParam = 0;
+        let limitParam = 0;
         try {
-            return await this.usersRepositoryHandler.getUsers()
+            if (req) {
+                const query = req.query as unknown as GetPaginationQueryParams
+                const {skip, limit} = getPagination(query)
+                skipParam = skip
+                limitParam = limit
+            }
+            return await this.usersRepositoryHandler.getUsers(skipParam, limitParam)
         } catch (error) {
+            res?.status(500).json(errorHandler.serverError(error))
             return errorHandler.serverError(error)
         }
     }

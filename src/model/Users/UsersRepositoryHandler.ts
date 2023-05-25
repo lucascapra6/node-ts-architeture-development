@@ -1,13 +1,14 @@
 import {UserModel} from "./schemas/Users.js";
 import {IUsersRepositoryHandler} from "../../interfaces/Users/UsersRepository/index.js";
 import {User, Users} from "../../interfaces/Users/index.js";
+import {GetPaginationQueryParams} from "../../services/Query/query.js";
 export class UsersRepositoryHandler implements IUsersRepositoryHandler{
     public model;
     constructor(model: typeof UserModel) {
         this.model = model
     }
-    async getUsers(): Promise<Users> {
-        return this.model.find()
+    async getUsers(skip: number, limit: number): Promise<Users> {
+        return this.model.find().skip(skip).limit(limit)
     }
     async insertUser(user:User): Promise<User> {
         return this.model.create(user)
