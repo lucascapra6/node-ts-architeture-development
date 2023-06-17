@@ -3,6 +3,7 @@ import {UserController} from "../../controllers/UserController/index.js";
 import {UsersRepositoryHandler} from "../../model/Users/UsersRepositoryHandler.js";
 const userRouter = Router();
 import {UserModel} from "../../model/Users/schemas/Users.js";
+import {checkLoggedIn} from "../../services/Login/OAuth/OAuth.js";
 
 const usersRepository = new UsersRepositoryHandler(UserModel)
 const usersController = new UserController(usersRepository);
@@ -19,7 +20,7 @@ const updateUser = async (req: Request, res: Response) => {
     res.json(response)
 }
 
-userRouter.get('/users', getUsers);
+userRouter.get('/users', checkLoggedIn, getUsers);
 userRouter.post('/insertUser', insertUser)
 userRouter.put('/updateUser', updateUser)
 
