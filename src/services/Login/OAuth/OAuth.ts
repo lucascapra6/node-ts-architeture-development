@@ -15,7 +15,7 @@ oAuthLoginRouter.get('/auth/google', passport.authenticate('google', {
 oAuthLoginRouter.get('/auth/google/callback', passport.authenticate('google', {
     failureRedirect: '/failure',
     successRedirect: '/v1/users',
-    session: false
+    session: true
 }), () => {
     console.log('google called us back')
 })
