@@ -1,4 +1,4 @@
 export interface IUsersCredentials {
-    email: string
+    nickName: string
     password: string
 }

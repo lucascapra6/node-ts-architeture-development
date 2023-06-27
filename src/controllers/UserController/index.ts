@@ -7,8 +7,8 @@ import {getPagination, GetPaginationQueryParams} from "../../services/Query/quer
 import RequestErrorHandler from "../../helpers/Errors/RequestErrorHandler.js";
 import RequestResponseErrorThrowler from "../../helpers/Errors/RequestResponseErrorThrowler.js";
 import {RequestResponseError} from "../../types/Error.js";
+import bcrypt from 'bcrypt'
 const errorHandler = new ErrorHandler()
-
 export class UserController implements IUserController{
     public readonly usersRepositoryHandler
     constructor(usersRepositoryHandler: IUsersRepositoryHandler) {
@@ -38,7 +38,8 @@ export class UserController implements IUserController{
                 throw new RequestResponseErrorThrowler(409, 'Usuário já registrado no sistema.');
             }
             const userWithId = await this.insertUserId(user) as User;
-            const response = await this.usersRepositoryHandler.insertUser(userWithId);
+            const encryptedPassword = await bcrypt.hash(user.password, 10)
+            const response = await this.usersRepositoryHandler.insertUser({...userWithId, password: encryptedPassword});
             res.json(response);
         } catch (error: any) {
             if (error instanceof RequestResponseErrorThrowler) {

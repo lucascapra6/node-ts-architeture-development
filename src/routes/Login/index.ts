@@ -3,22 +3,12 @@ import LoginController from "../../controllers/LoginController/index.js";
 import {IUsersCredentials} from "../../interfaces/Login/IUsersCredentials/index.js";
 import UserLoginService from "../../services/Login/InternalAuth/UserLoginService.js";
 const loginRouter = Router()
-const loginController = new LoginController<IUsersCredentials>(new UserLoginService<IUsersCredentials>())
+const loginController = new LoginController(new UserLoginService())
 const doLogin = async (req: Request, res: Response) => {
-    const {email, password} = req.body
-    const response = await loginController.handleLogin({email, password})
-    return res.json(response)
+    const {nickName, password} = req.body
+    const response = await loginController.handleLogin({nickName, password})
+    return res.status(response.status).json(response)
 }
-const verifyRequest = (req: Request, res: Response, next: NextFunction) => {
-    try {
-        if(!req.body.email || !req.body.password) {
-            throw new Error('Parametro invalido')
-        }
-        next()
-    } catch (e) {
-        res.status(500)
-    }
-};
 
 loginRouter.post('/login', doLogin)
 
