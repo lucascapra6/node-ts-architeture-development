@@ -4,6 +4,7 @@ import AuthenticationService from "./AuthenticationService.js";
 import IValidationService from "../../../interfaces/Login/ValidationService/index.js";
 import {IUsersCredentials} from "../../../interfaces/Login/IUsersCredentials/index.js";
 import {UserModel} from "../../../model/Users/schemas/Users.js";
+import {User} from "../../../interfaces/Users/index.js";
 
 export default class UserLoginService extends AbstractLoginService {
     validationService

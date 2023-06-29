@@ -17,13 +17,14 @@ export function configurePassportStrategy() {
 export function configureSerializeUser() {
     //save the session to the cookie
     return passport.serializeUser((user: any, done) => {
-        console.log(user)
+        console.log('serialized user', user)
         done(null, user.id)
     })
 }
 export function configureDeserializeUser() {
 //read the session from the cookie
     return passport.deserializeUser((user: any, done) => {
+        console.log('deserialize', user)
         done(null, user)
     })
 }

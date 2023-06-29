@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken'
 import {User} from "../../../interfaces/Users/index.js";
-export default class AuthenticationService {
+import {IAuthenticationService} from "../../../interfaces/Login/AuthenticationService/index.js";
+export default class AuthenticationService implements IAuthenticationService {
     tokenService
     constructor() {
         this.tokenService = jwt
@@ -8,9 +9,10 @@ export default class AuthenticationService {
     authenticate(user: User) {
         const jwtToken = this.tokenService.sign({
             userId: user.id,
-            email: user.nickName
+            nickName: user.nickName,
+            role: user.role
         }, process.env.JWT_TOKEN_KEY as string, {
-            expiresIn: '1m'
+            expiresIn: '5m'
         })
         return jwtToken
     }

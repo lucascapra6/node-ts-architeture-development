@@ -2,7 +2,8 @@ import {Router} from "express";
 import passport from "passport";
 import {Request, Response, NextFunction} from "express";
 export function verifyCallback(accessToken: any, refreshToken:any, profile: any, done:any) {
-    console.log('refresh token', refreshToken)
+    console.log('access token', accessToken)
+    console.log('profile', profile)
     done(null, profile)
 }
 
