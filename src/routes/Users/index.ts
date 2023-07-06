@@ -8,15 +8,14 @@ import {checkAdminLoggedIn, checkUserLoggedIn} from "../../middlewares/CheckLogg
 const usersRepository = new UsersRepositoryHandler(UserModel)
 const usersController = new UserController(usersRepository);
 
-const getUsers = async (req: Request, res: Response) => {
-    const response = await usersController.getUsers(req, res)
-    res.json(response)
+const getUsers = async (req: Request, res: Response, next: NextFunction) => {
+    await usersController.getUsers(req, res, next)
 }
-const insertUser = async (req: Request, res: Response) => {
-    await usersController.insertUser(req, res)
+const insertUser = async (req: Request, res: Response, next: NextFunction) => {
+    await usersController.insertUser(req, res, next)
 }
-const updateUser = async (req: Request, res: Response) => {
-    const response = await usersController.updateUser(req, res)
+const updateUser = async (req: Request, res: Response, next: NextFunction) => {
+    const response = await usersController.updateUser(req, res, next)
     res.json(response)
 }
 

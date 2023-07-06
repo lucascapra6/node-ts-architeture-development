@@ -7,6 +7,7 @@ import api from './api.js'
 import oAuthLogin, {verifyCallback} from "./services/Login/OAuth/OAuth.js";
 import MiddlewaresHandler from "./middlewares/MiddlewaresHandler.js";
 import refresh from 'passport-oauth2-refresh'
+import serverErrorMiddleware from "./middlewares/Error/serverError.middleware.js";
 const createServer = () : Application => {
     dotenv.config()
     const app = express();
@@ -27,6 +28,7 @@ const createServer = () : Application => {
     });
     app.use('/v1', api)
     app.use('/v1', oAuthLogin)
+    app.use(serverErrorMiddleware)
     return app
 }
 

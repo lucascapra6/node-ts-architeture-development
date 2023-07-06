@@ -9,6 +9,8 @@ export default class AuthenticationService2<T extends {name: string, lastName: s
         }, process.env.JWT_TOKEN_KEY as string, {
             expiresIn: '5m'
         })
-        return jwtToken
+
+        const refreshToken = 'asdf'
+        return {jwtToken, refreshToken}
     }
 }
