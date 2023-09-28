@@ -17,8 +17,8 @@ jobs:
         run: npm install
       - name: Create key.pem and cert.pem
         run: |
-          echo "${{ secrets.KEY_PEM }}" | tr -d '\r' > key.pem
-          echo "${{ secrets.CERT_PEM }}" | tr -d '\r' > cert.pem
+          echo -n "${{ secrets.KEY_PEM }}" | base64 -d > key.pem
+          echo -n "${{ secrets.CERT_PEM }}" | base64 -d > cert.pem
       - name: Start project
         run: npm start
 
