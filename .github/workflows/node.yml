@@ -7,6 +7,7 @@ on:
 jobs:
   build:
     runs-on: [ubuntu-latest]
+    environment: production
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js version 16
@@ -17,7 +18,7 @@ jobs:
         run: npm install
       - name: Log KEY_PEM secret
         run: echo "KEY_PEM secret value is ${{ secrets.KEY_PEM }}"
-        
+
       - name: Create key.pem
         run: echo "${{ secrets.KEY_PEM }}" > key.pem
 
