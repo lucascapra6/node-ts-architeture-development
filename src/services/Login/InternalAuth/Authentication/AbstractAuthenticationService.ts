@@ -5,6 +5,8 @@ import jwt from "jsonwebtoken";
 export default abstract class AbstractAuthenticationService<T> implements IAuthenticationService<T> {
     abstract signJwt(user: T): {jwtToken: string, refreshToken: string}
     verifyJwt(token: string, tokenKey: string) {
+        console.log('token', token)
+        console.log('tokenKey', tokenKey)
         try {
             const decoded = jwt.verify(token, tokenKey)
             return decoded
