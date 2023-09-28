@@ -13,6 +13,12 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '16'
-      - run: npm install
-      - run: npm start ${{secrets.KEY_PEM}}
+      - name: Install dependencies
+        run: npm install
+      - name: Create key.pem and cert.pem
+        run: |
+          echo "${{ secrets.KEY_PEM }}" | tr -d '\r' > key.pem
+          echo "${{ secrets.CERT_PEM }}" | tr -d '\r' > cert.pem
+      - name: Start project
+        run: npm start
 
