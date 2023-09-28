@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "jest",
-    "start": "nodemon",
+    "nodemon": "nodemon",
+    "start": "tsc && ts-node dist/index.js",
     "start-cluster": "tsc && pm2 start dist/index.js -i max",
     "delete-clusters": "pm2 delete all"
   },
