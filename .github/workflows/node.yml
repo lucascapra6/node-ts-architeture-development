@@ -28,6 +28,12 @@ jobs:
       - name: Use .env variables
         run: |
           echo "clientID=${{ secrets.CLIENT_ID }}" >> .env
-          # Add more variables as needed
+
+      - name: List files in the directory
+        run: ls -al
+
+      - name: Print .env content
+        run: cat .env
+
       - name: Start project with variables
         run: npm start
