@@ -27,7 +27,7 @@ jobs:
 
       - name: Use .env variables
         run: |
-          echo "clientID=${{ secrets.CLIENT_ID }}" >> .env
+          echo "CLIENT_ID=${{ secrets.CLIENT_ID }}" >> .env
 
       - name: List files in the directory
         run: ls -al
