@@ -17,17 +17,16 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Log clientID
-        run: echo "clientID secret value is ${{ secrets.CERT_PEM}}"
-
       - name: Create key.pem
         run: echo "${{ secrets.KEY_PEM }}" > key.pem
 
       - name: Create cert.pem
         run: echo "${{ secrets.CERT_PEM }}" > cert.pem
 
-      - name: Set clientID environment variable
-        run: echo "clientID=${{ env.CLIENT_ID }}" >> $GITHUB_ENV
-
-      - name: Start project
+      - name: Start project with variables
         run: npm start
+
+    env:
+      CLIENT_ID: ${{ github.event.inputs.clientID }}
+      clientId: ${{ github.event.inputs.CLIENT_ID }}
+      # Add other variables as needed
