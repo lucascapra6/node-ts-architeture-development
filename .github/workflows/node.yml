@@ -17,9 +17,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Get IP address
-        run: ./get_ip.sh
-
       - name: Create key.pem
         run: echo "${{ secrets.KEY_PEM }}" > key.pem
 
