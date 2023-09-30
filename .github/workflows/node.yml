@@ -16,8 +16,6 @@ jobs:
           node-version: '16'
       - name: Install dependencies
         run: npm install
-      - name: Log KEY_PEM secret
-        run: echo "KEY_PEM secret value is ${{ secrets.KEY_PEM }}"
 
       - name: Create key.pem
         run: echo "${{ secrets.KEY_PEM }}" > key.pem
@@ -26,7 +24,7 @@ jobs:
         run: echo "${{ secrets.CERT_PEM }}" > cert.pem
 
       - name: Set clientID environment variable
-        run: echo "clientID=${{ secrets.CLIENT_ID }}" >> $GITHUB_ENV
+        run: echo "clientID=${{ env.CLIENT_ID }}" >> $GITHUB_ENV
 
       - name: Start project
         run: npm start
