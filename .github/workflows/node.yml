@@ -26,7 +26,8 @@ jobs:
         run: echo "${{ secrets.CERT_PEM }}" > cert.pem
 
       - name: Use .env variables
-        run: echo "clientID=${{ secrets.CLIENT_ID }}" >> .env
-
+        run: |
+          echo "clientID=${{ secrets.CLIENT_ID }}" >> .env
+          # Add more variables as needed
       - name: Start project with variables
         run: npm start
