@@ -4,6 +4,9 @@ on:
     branches: [master]
   pull_request:
     branches: [master]
+env:
+  CLIENT_ID: ${{env.CLIENT_ID}}
+
 jobs:
   build:
     runs-on: [ubuntu-latest]
