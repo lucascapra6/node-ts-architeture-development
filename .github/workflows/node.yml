@@ -25,10 +25,8 @@ jobs:
       - name: Create cert.pem
         run: echo "${{ secrets.CERT_PEM }}" > cert.pem
 
+      - name: Set clientID environment variable
+        run: echo "clientID=${{ secrets.CLIENT_ID }}" >> $GITHUB_ENV
+
       - name: Start project with variables
         run: npm start
-
-    env:
-      CLIENT_ID: ${{ github.event.inputs.clientID }}
-      clientID: ${{ github.event.inputs.CLIENT_ID }}
-      # Add other variables as needed
