@@ -16,6 +16,8 @@ jobs:
           node-version: '16'
       - name: Install dependencies
         run: npm install
+      - name: Log KEY_PEM secret
+        run: echo "KEY_PEM secret value is ${{ github.event.inputs.CLIENT_ID }}"
 
       - name: Create key.pem
         run: echo "${{ secrets.KEY_PEM }}" > key.pem
@@ -28,5 +30,5 @@ jobs:
 
     env:
       CLIENT_ID: ${{ github.event.inputs.clientID }}
-      clientId: ${{ github.event.inputs.CLIENT_ID }}
+      clientID: ${{ github.event.inputs.CLIENT_ID }}
       # Add other variables as needed
