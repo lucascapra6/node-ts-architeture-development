@@ -16,9 +16,7 @@ jobs:
           node-version: '16'
       - name: Install dependencies
         run: npm install
-      - name: Log KEY_PEM secret
-        run: echo "KEY_PEM secret value is ${{ secrets.CLIENT_ID }}"
-
+     
       - name: Create key.pem
         run: echo "${{ secrets.KEY_PEM }}" > key.pem
 
@@ -27,7 +25,19 @@ jobs:
 
       - name: Use .env variables
         run: |
+          echo "PORT=3002" >> .env
           echo "CLIENT_ID=${{ secrets.CLIENT_ID }}" >> .env
+          echo "CLIENT_SECRET=${{ secrets.CLIENT_SECRET }}" >> .env
+          echo "DB_HOST=${{ secrets.DB_HOST }}" >> .env
+          echo "DB_USER=${{ secrets.DB_USER }}" >> .env
+          echo "COOKIE_KEY1=${{ secrets.COOKIE_KEY1 }}" >> .env
+          echo "COOKIE_KEY2=${{ secrets.COOKIE_KEY2 }}" >> .env
+          echo "JWT_ACCESS_TOKEN_KEY=${{ secrets.JWT_ACCESS_TOKEN_KEY }}" >> .env
+          echo "JWT_REFRESH_TOKEN_KEY=${{ secrets.JWT_REFRESH_TOKEN_KEY }}" >> .env
+          echo "JWT_AUDIENCE=${{ secrets.JWT_AUDIENCE }}" >> .env
+          echo "JWT_ISSUER=${{ secrets.JWT_ISSUER }}" >> .env
+          echo "JWT_ACCESS=${{ secrets.JWT_ACCESS }}" >> .env
+          echo "JWT_REFRESH=${{ secrets.JWT_REFRESH }}" >> .env
 
       - name: List files in the directory
         run: ls -al
