@@ -4,9 +4,6 @@ on:
     branches: [master]
   pull_request:
     branches: [master]
-env:
-  CLIENT_ID: ${{env.CLIENT_ID}}
-
 jobs:
   build:
     runs-on: [ubuntu-latest]
@@ -30,4 +27,7 @@ jobs:
 
       - name: Start project
         run: npm start
+
+    env:
+      clientID: ${{ env.CLIENT_ID }}
 
