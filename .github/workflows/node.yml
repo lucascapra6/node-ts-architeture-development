@@ -18,7 +18,7 @@ jobs:
         run: npm install
 
       - name: Log clientID
-        run: echo "clientID secret value is ${{ env.CLIENT_ID}}"
+        run: echo "clientID secret value is ${{ secret.CERT_PEM}}"
 
       - name: Create key.pem
         run: echo "${{ secrets.KEY_PEM }}" > key.pem
