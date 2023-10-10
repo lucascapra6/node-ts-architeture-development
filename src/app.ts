@@ -8,7 +8,7 @@ import oAuthLogin, {verifyCallback} from "./services/Login/OAuth/OAuth.js";
 import MiddlewaresHandler from "./middlewares/MiddlewaresHandler.js";
 import refresh from 'passport-oauth2-refresh'
 import serverErrorMiddleware from "./middlewares/Error/serverError.middleware.js";
-const createServer = () : Application => {
+export const createServer = () : Application => {
     dotenv.config()
     const app = express();
     mongoHelper.connect()
@@ -31,5 +31,3 @@ const createServer = () : Application => {
     app.use(serverErrorMiddleware)
     return app
 }
-
-export default createServer
