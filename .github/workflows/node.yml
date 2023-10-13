@@ -5,7 +5,7 @@ on:
   pull_request:
     branches: [master]
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
     environment: production
     steps:
@@ -38,12 +38,16 @@ jobs:
           echo "JWT_ISSUER=${{ secrets.JWT_ISSUER }}" >> .env
           echo "JWT_ACCESS=${{ secrets.JWT_ACCESS }}" >> .env
           echo "JWT_REFRESH=${{ secrets.JWT_REFRESH }}" >> .env
-
-      - name: List files in the directory
-        run: ls -al
-
-      - name: Print .env content
-        run: cat .env
-
       - name: Run tests
         run: npm test
+
+  build-docker:
+    steps:
+      - name: Checkout source
+      - uses: actions/checkout@v2
+      - name: Login to Docker Hub
+        run: docker login -u ${{secrets.DOCKER_ACCOUNT_ID}} -p ${{secrets.DOCKER_ACCOUNT_PASSWORD}}
+      - name: Build docker image
+        run: docker build -t lucascapra123/node-login-architeture
+
+
