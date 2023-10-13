@@ -53,7 +53,7 @@ jobs:
         run: docker login -u ${{secrets.DOCKER_ACCOUNT_ID}} -p ${{secrets.DOCKER_ACCOUNT_PASSWORD}}
 
       - name: Build docker image
-        run: docker build -t lucascapra123/node-login-architeture .
+        run: docker build . -t lucascapra123/node-login-architeture
 
       - name: Publish image
         run: docker push lucascapra123/node-login-architeture
@@ -62,8 +62,6 @@ jobs:
     needs: build-docker
     runs-on: [aws-ec2]
     steps:
-      - name: run github runner
-        run: ./run.sh
       - name: Pull image from docker hub
         run: docker pull lucascapra123/node-login-architeture
       - name: Delete old container
