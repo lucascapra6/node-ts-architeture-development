@@ -65,9 +65,9 @@ jobs:
       - name: Pull image from docker hub
         run: docker pull lucascapra123/node-login-architeture
       - name: Delete old container
-        run: docker rm -f lucascapra123/node-login-architeture
+        run: docker rm -f node-login-architeture-container
       - name: Run image
-        run: docker run -d -p 3002:3002 --name node-login-architeture lucascapra123/node-login-architeture
-        
+        run: docker run -d -p 3002:3002 --name node-login-architeture-container lucascapra123/node-login-architeture
+
 
 
