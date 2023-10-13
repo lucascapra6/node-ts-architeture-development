@@ -44,9 +44,11 @@ jobs:
   build-docker:
     steps:
       - name: Checkout source
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
+
       - name: Login to Docker Hub
         run: docker login -u ${{secrets.DOCKER_ACCOUNT_ID}} -p ${{secrets.DOCKER_ACCOUNT_PASSWORD}}
+
       - name: Build docker image
         run: docker build -t lucascapra123/node-login-architeture
 
