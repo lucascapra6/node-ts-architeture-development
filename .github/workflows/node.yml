@@ -5,7 +5,7 @@ on:
   pull_request:
     branches: [master]
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
     environment: production
     steps:
@@ -38,12 +38,36 @@ jobs:
           echo "JWT_ISSUER=${{ secrets.JWT_ISSUER }}" >> .env
           echo "JWT_ACCESS=${{ secrets.JWT_ACCESS }}" >> .env
           echo "JWT_REFRESH=${{ secrets.JWT_REFRESH }}" >> .env
+      - name: Run tests
+        run: npm test
 
-      - name: List files in the directory
-        run: ls -al
+  build-docker:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v2
 
-      - name: Print .env content
-        run: cat .env
+      - name: Login to Docker Hub
+        run: docker login -u ${{secrets.DOCKER_ACCOUNT_ID}} -p ${{secrets.DOCKER_ACCOUNT_PASSWORD}}
 
-      - name: Start project with variables
-        run: npm start
+      - name: Build docker image
+        run: docker build -t lucascapra123/node-login-architeture .
+
+      - name: Publish image
+        run: docker push lucascapra123/node-login-architeture
+
+  deploy:
+    needs: build-docker
+    runs-on: [aws-ec2]
+    steps:
+      - name: Pull image from docker hub
+        run: docker pull lucascapra123/node-login-architeture
+      - name: Delete old container
+        run: docker rm -f node-server
+      - name: Run image
+        run: docker run -it -p 3002:3002 --restart=always --name node-server lucascapra123/node-login-architeture
+
+
+
