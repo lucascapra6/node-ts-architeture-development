@@ -1,6 +1,6 @@
 FROM node:16-alpine
-WORKDIR /app
-COPY . /app
+WORKDIR /backend
+COPY . /backend
 RUN npm install
 EXPOSE 3002
 CMD ["npm", "start"]
