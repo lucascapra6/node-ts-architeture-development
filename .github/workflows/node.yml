@@ -1,7 +1,7 @@
 name: Users Manage CI
 on:
   push:
-    branches: [master]
+    branches: [master, master-ci-cd-setup]
   pull_request:
     branches: [master]
 jobs:
@@ -45,5 +45,5 @@ jobs:
       - name: Print .env content
         run: cat .env
 
-      - name: Start project with variables
-        run: npm start
+      - name: Run tests
+        run: npm test
