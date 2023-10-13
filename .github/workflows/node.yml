@@ -42,6 +42,7 @@ jobs:
         run: npm test
 
   build-docker:
+    needs: build-and-test
     runs-on: ubuntu-latest
     environment: production
     steps:
@@ -53,5 +54,20 @@ jobs:
 
       - name: Build docker image
         run: docker build -t lucascapra123/node-login-architeture .
+
+      - name: Publish image
+        run: docker push lucascapra123/node-login-architeture
+
+  deploy:
+    needs: build-docker
+    runs-on: [aws-ec2]
+    steps:
+      - name: Pull image from docker hub
+        run: docker pull lucascapra123/node-login-architeture
+      - name: Delete old container
+        run: docker rm -f lucascapra123/node-login-architeture
+      - name: Run image
+        run: docker run -d -p 3002:3002 --name node-login-architeture lucascapra123/node-login-architeture
+        
 
 
