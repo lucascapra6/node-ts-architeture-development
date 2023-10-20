@@ -4,6 +4,22 @@ on:
     branches: [master]
   pull_request:
     branches: [master]
+
+env:
+  PORT: 3002
+  CLIENT_ID: ${{ secrets.CLIENT_ID }}
+  CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+  DB_HOST: ${{ secrets.DB_HOST }}
+  DB_USER: ${{ secrets.DB_USER }}
+  COOKIE_KEY1: ${{ secrets.COOKIE_KEY1 }}
+  COOKIE_KEY2: ${{ secrets.COOKIE_KEY2 }}
+  JWT_ACCESS_TOKEN_KEY: ${{ secrets.JWT_ACCESS_TOKEN_KEY }}
+  JWT_REFRESH_TOKEN_KEY: ${{ secrets.JWT_REFRESH_TOKEN_KEY }}
+  JWT_AUDIENCE: ${{ secrets.JWT_AUDIENCE }}
+  JWT_ISSUER: ${{ secrets.JWT_ISSUER }}
+  JWT_ACCESS: ${{ secrets.JWT_ACCESS }}
+  JWT_REFRESH: ${{ secrets.JWT_REFRESH }}
+
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
@@ -17,27 +33,12 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Create key.pem
-        run: echo "${{ secrets.KEY_PEM }}" > key.pem
-
-      - name: Create cert.pem
-        run: echo "${{ secrets.CERT_PEM }}" > cert.pem
-
-      - name: Use .env variables
+      - name: Create .env file
         run: |
-          echo "PORT=3002" >> .env
-          echo "CLIENT_ID=${{ secrets.CLIENT_ID }}" >> .env
-          echo "CLIENT_SECRET=${{ secrets.CLIENT_SECRET }}" >> .env
-          echo "DB_HOST=${{ secrets.DB_HOST }}" >> .env
-          echo "DB_USER=${{ secrets.DB_USER }}" >> .env
-          echo "COOKIE_KEY1=${{ secrets.COOKIE_KEY1 }}" >> .env
-          echo "COOKIE_KEY2=${{ secrets.COOKIE_KEY2 }}" >> .env
-          echo "JWT_ACCESS_TOKEN_KEY=${{ secrets.JWT_ACCESS_TOKEN_KEY }}" >> .env
-          echo "JWT_REFRESH_TOKEN_KEY=${{ secrets.JWT_REFRESH_TOKEN_KEY }}" >> .env
-          echo "JWT_AUDIENCE=${{ secrets.JWT_AUDIENCE }}" >> .env
-          echo "JWT_ISSUER=${{ secrets.JWT_ISSUER }}" >> .env
-          echo "JWT_ACCESS=${{ secrets.JWT_ACCESS }}" >> .env
-          echo "JWT_REFRESH=${{ secrets.JWT_REFRESH }}" >> .env
+          for key in ${!env.*}; do
+            echo "$key=${!key}" >> .env
+          done
+
       - name: Run tests
         run: npm test
 
@@ -52,21 +53,11 @@ jobs:
       - name: Login to Docker Hub
         run: docker login -u ${{secrets.DOCKER_ACCOUNT_ID}} -p ${{secrets.DOCKER_ACCOUNT_PASSWORD}}
 
-      - name: create .env
+      - name: Create .env file
         run: |
-          echo "PORT=3002" >> .env
-          echo "CLIENT_ID=${{ secrets.CLIENT_ID }}" >> .env
-          echo "CLIENT_SECRET=${{ secrets.CLIENT_SECRET }}" >> .env
-          echo "DB_HOST=${{ secrets.DB_HOST }}" >> .env
-          echo "DB_USER=${{ secrets.DB_USER }}" >> .env
-          echo "COOKIE_KEY1=${{ secrets.COOKIE_KEY1 }}" >> .env
-          echo "COOKIE_KEY2=${{ secrets.COOKIE_KEY2 }}" >> .env
-          echo "JWT_ACCESS_TOKEN_KEY=${{ secrets.JWT_ACCESS_TOKEN_KEY }}" >> .env
-          echo "JWT_REFRESH_TOKEN_KEY=${{ secrets.JWT_REFRESH_TOKEN_KEY }}" >> .env
-          echo "JWT_AUDIENCE=${{ secrets.JWT_AUDIENCE }}" >> .env
-          echo "JWT_ISSUER=${{ secrets.JWT_ISSUER }}" >> .env
-          echo "JWT_ACCESS=${{ secrets.JWT_ACCESS }}" >> .env
-          echo "JWT_REFRESH=${{ secrets.JWT_REFRESH }}" >> .env
+          for key in ${!env.*}; do
+            echo "$key=${!key}" >> .env
+          done
 
       - name: Build docker image
         run: docker build . -t lucascapra123/node-login-architeture
@@ -78,14 +69,9 @@ jobs:
     needs: build-docker
     runs-on: [aws-ec2]
     steps:
-      - name: Pull image from docker hub
+      - name: Pull image from Docker Hub
         run: docker pull lucascapra123/node-login-architeture
       - name: Delete old container
         run: docker rm -f node-server
       - name: Run image
-#        run: docker run -it -p 3002:3002 --restart=always --name node-server lucascapra123/node-login-architeture
         run: docker run -d -p 3002:3002 --restart=always --name node-server lucascapra123/node-login-architeture
-
-
-
-
