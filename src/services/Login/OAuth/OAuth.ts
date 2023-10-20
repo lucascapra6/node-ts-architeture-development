@@ -21,7 +21,7 @@ oAuthLoginRouter.get('/auth/google/callback', passport.authenticate('google', {
 })
 
 oAuthLoginRouter.get('/failure', (req, res) => {
-    res.send('failure')
+    res.send('failure v1')
 })
 
 oAuthLoginRouter.get('/logout', (req, res) => {
