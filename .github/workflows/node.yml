@@ -4,20 +4,6 @@ on:
     branches: [master]
   pull_request:
     branches: [master]
-env:
-  PORT: 3002
-  CLIENT_ID: ${{ secrets.CLIENT_ID }}
-  CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
-  DB_HOST: ${{ secrets.DB_HOST }}
-  DB_USER: ${{ secrets.DB_USER }}
-  COOKIE_KEY1: ${{ secrets.COOKIE_KEY1 }}
-  COOKIE_KEY2: ${{ secrets.COOKIE_KEY2 }}
-  JWT_ACCESS_TOKEN_KEY: ${{ secrets.JWT_ACCESS_TOKEN_KEY }}
-  JWT_REFRESH_TOKEN_KEY: ${{ secrets.JWT_REFRESH_TOKEN_KEY }}
-  JWT_AUDIENCE: ${{ secrets.JWT_AUDIENCE }}
-  JWT_ISSUER: ${{ secrets.JWT_ISSUER }}
-  JWT_ACCESS: ${{ secrets.JWT_ACCESS }}
-  JWT_REFRESH: ${{ secrets.JWT_REFRESH }}
 
 jobs:
   build-and-test:
@@ -38,13 +24,11 @@ jobs:
       - name: Create cert.pem
         run: echo "${{ secrets.CERT_PEM }}" > cert.pem
 
-      - name: Use .env variables
+      - name: create .env
         run: |
-      - name: Create .env file
-        run: |
-            for key in ${!env.*}; do
-            echo "$key=${!key}" >> .env
-            done
+          touch .env
+          echo "${{secrets.PROD_ENV_FILE}}"
+
       - name: Run tests
         run: npm test
 
