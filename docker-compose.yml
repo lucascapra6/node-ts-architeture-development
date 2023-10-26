@@ -1,0 +1,7 @@
+services:
+  app:
+    build: .
+    container_name: my_node_server
+    command: npm start
+    ports:
+      - "3002:3002"
