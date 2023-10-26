@@ -33,15 +33,15 @@ jobs:
         run: npm test
 
   deploy-aws-ec2:
-  runs-on: ubuntu-latest
-  steps:
-          - id: deploy
-            uses: bitovi/github-actions-deploy-docker-to-ec2@v0.5.8
-            with:
-              aws_access_key_id: ${{ AWS_ACCESS_KEY }}
-              aws_secret_access_key: ${{ AWS_ACCESS_KEY_SECRET }}
-              aws_default_region: us-east-1
-              dot_env: ${{ PROD_ENV_FILE}}
+    runs-on: ubuntu-latest
+    steps:
+      - id: deploy
+        uses: bitovi/github-actions-deploy-docker-to-ec2@v0.5.8
+        with:
+        aws_access_key_id: ${{ AWS_ACCESS_KEY }}
+        aws_secret_access_key: ${{ AWS_ACCESS_KEY_SECRET }}
+        aws_default_region: us-east-1
+        dot_env: ${{ PROD_ENV_FILE}}
 
 
 
